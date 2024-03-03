@@ -1,36 +1,11 @@
-import React, { useState } from 'react';
-import { Divider, Radio } from 'antd';
+import React from 'react';
+import { Divider } from 'antd';
 import BasicPackages from '../BasicPackages/BasicPackages';
 import OptionsPckages from '../OptionsPckages/OptionsPckages';
 
 export default function Service({service}) {
     const { serviceName, baseLine, options } = service
-    // console.log(serviceName)
-    // console.log(baseline)
-    // console.log(options)
 
-    // if (baseline) {
-
-    // }
-    // console.log(service["DF Workspace Premium"])
-    const [value3, setValue3] = useState('');
-
-    const onChange3 = ({ target: { value } }) => {
-        console.log('radio1-2 checked', value);
-    
-        setValue3(value);
-      };
-    //   console.log(baseLine)
-    // const optionsRadios = [
-    //     {
-    //       label: service["DF Workspace Premium"][0].title,
-    //       value: service["DF Workspace Premium"][0].title,
-    //     },
-    //     {
-    //       label: service["DF Workspace Premium"][1].title,
-    //       value: service["DF Workspace Premium"][1].title,
-    //     }
-    //   ];
     return (
         <div className='widget__calculator__group'>
             {

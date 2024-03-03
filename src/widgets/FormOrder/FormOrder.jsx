@@ -14,7 +14,7 @@ export default function FormOrder() {
     return (
         <section className="widget">
             <div className="widget__form-order">
-                {baseLine && <ConfigurInfo purchases={purchases}/>}
+                {baseLine && <ConfigurInfo purchases={purchases} finalPrice={finalPrice}/>}
                 <FinalPrice finalPrice={finalPrice}/>
                 <div className="button-container">
                     <PreviewCO />

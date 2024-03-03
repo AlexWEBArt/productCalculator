@@ -3,6 +3,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 const initialState = {
     baseLine: null,
     options: [],
+    usageBased: [],
 }
 
 const selectedSlice = createSlice({
@@ -38,5 +39,5 @@ const selectedSlice = createSlice({
     }
 })
 
-export const { selectBaseLine, selectOption, unSelectOption, addValue } = selectedSlice.actions;
+export const { selectBaseLine, selectOption, selectUsageBased, unSelectOption, addValue } = selectedSlice.actions;
 export default selectedSlice.reducer;

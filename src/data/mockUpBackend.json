@@ -97,14 +97,6 @@
                            "min": "100",
                            "step": "100"
                         }
-                     },
-                     {
-                        "type": "select",
-                        "defaultValue": "ГБ",
-                        "variants": [
-                           "ГБ",
-                           "ТБ"
-                        ]
                      }
                   ],
                   "unit": "Гб",
@@ -124,7 +116,16 @@
                   "service_element": "Managed Cloud Backup",
                   "title": "Резервное копирование ВМ с администрированием",
                   "disabledForBaseLine": [],
-                  "specialTypes": [],
+                  "specialTypes": [
+                     {
+                        "type": "slider",
+                        "limits": {
+                           "max": "10",
+                           "min": "1",
+                           "step": "0"
+                        }
+                     }
+                  ],
                   "unit": "ВМ",
                   "charge_type": "usage based",
                   "price": "1500.00",

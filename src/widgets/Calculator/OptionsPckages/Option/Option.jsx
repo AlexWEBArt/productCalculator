@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, Tooltip, Col, InputNumber, Row, Slider } from 'antd';
+import { Switch, Tooltip, InputNumber } from 'antd';
 import SpecialType from './SpecialType/SpecialType'
 import { useDispatch, useSelector } from 'react-redux';
 import { addValue, selectOption, unSelectOption } from '../../../../redux/slices/selectedSlice';
@@ -28,18 +28,16 @@ export default function Option({ option }) {
 
     useEffect(() => {
         if (discountValue >= 0) {
-            dispatch(addValue({id: option.id, discount: discountValue}))
+            dispatch(addValue({ id: option.id, discount: discountValue }))
         }
     }, [discountValue])
 
-    
-
     const onChangeOptionSwitcher = (e) => {
-        console.log('radio3-5 checked', e);
         if (e) {
             setSwitchOff(false)
-            dispatch(selectOption({...option, quantity: 1}))
+            dispatch(selectOption({ ...option, quantity: 1 }))
         } else {
+            setDiscountValue(0)
             setSwitchOff(true)
             dispatch(unSelectOption(option))
         }
@@ -59,15 +57,16 @@ export default function Option({ option }) {
             <p><b>{option.service_element}</b></p>
             <div className='group-item__controls'>
                 {
-                    disabled ? 
-                    <Tooltip title={'Опция не доступна для этого пакета'}>
+                    disabled ?
+                        <Tooltip title={'Опция не доступна для этого пакета'}>
+                            <Switch disabled={disabled} onChange={onChangeOptionSwitcher} />
+                        </Tooltip>
+                        :
                         <Switch disabled={disabled} onChange={onChangeOptionSwitcher} />
-                    </Tooltip>
-                    :
-                    <Switch disabled={disabled} onChange={onChangeOptionSwitcher} />
                 }
                 <span>{option.title}</span>
             </div>
+
             {
                 Boolean(option.specialTypes.length) && <SpecialType disabled={disabled} option={option} types={option.specialTypes} />
             }
@@ -82,7 +81,15 @@ export default function Option({ option }) {
                         <Tooltip title={'Максимальная скидка ' + option.max_discount + '%. Нажмите, что бы применить.'}>
                             <span className='group-item__price__tooltip' onClick={handleOnClickMaxDiscount}>%</span>
                         </Tooltip>
-                        <InputNumber disabled={disabled || switchOff} min={0} max={option.max_discount} defaultValue={0} step={0.1} value={discountValue} onChange={onChangeOptionDiscount} />
+                        <InputNumber 
+                            disabled={disabled || switchOff} 
+                            min={0} 
+                            max={option.max_discount} 
+                            defaultValue={0} 
+                            step={0.1} 
+                            value={discountValue} 
+                            onChange={onChangeOptionDiscount} 
+                        />
                     </div>
                 </div>
             </div>

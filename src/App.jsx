@@ -2,14 +2,12 @@ import React from 'react';
 import Calculator from './widgets/Calculator/Calculator';
 import FormOrder from './widgets/FormOrder/FormOrder';
 
-
 const App = () => {
-    console.log('render')
     return (
         <div className="app">
             <header className='header'>
                 <div className='header__content'>
-                    Header
+                    PRODUCT CALCULATOR
                 </div>
             </header>
             <main className='main'>

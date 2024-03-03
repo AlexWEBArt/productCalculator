@@ -1,7 +1,7 @@
 import { Tooltip } from "antd"
 
 export default function InfoRow({ purchase }) {
-    console.log(purchase)
+
     return (
         <div className="price-prewiew__text-container">
             <span className="text-container__quantity">
@@ -14,7 +14,7 @@ export default function InfoRow({ purchase }) {
                 {
                     purchase.discount ?
                         <Tooltip title={'Применена скидка ' + purchase.discount + '%.'}>
-                            <span style={{color: '#ff9595'}}>
+                            <span style={{color: '#A30000'}}>
                                 {purchase.price} &#8381;
                             </span>
                         </Tooltip>

@@ -3,8 +3,6 @@ import TypeSlider from './TypeSlider/TypeSlider';
 
 export default function SpecialType({ option, types, disabled }) {
     return (
-        <TypeSlider option={option} type={types[0]} disabled={disabled}>
-            {types[1]}
-        </TypeSlider>
+        <TypeSlider option={option} type={types[0]} disabled={disabled} />
     )
 }

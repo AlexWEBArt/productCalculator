@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Col, InputNumber, Row, Slider } from 'antd';
-import TypeSelect from '../TypeSelect/TypeSelect';
 import { useDispatch, useSelector } from 'react-redux';
 import { addValue } from '../../../../../../redux/slices/selectedSlice';
 
-export default function TypeSlider({ children, option, type }) {
+export default function TypeSlider({ option, type }) {
     const {max, min, step} = type.limits
     const dispatch = useDispatch()
     const { options } = useSelector(store => store.selected)
@@ -52,12 +51,6 @@ export default function TypeSlider({ children, option, type }) {
                     value={inputValue}
                     onChange={onChangeOptionValue}
                 />
-                {children &&
-                    <TypeSelect
-                        disabled={disabled}
-                        type={children}
-                    />
-                }
             </Col>
         </Row>
     )

@@ -63,7 +63,7 @@
                   "service_element": "DF Workspace service",
                   "title": "DF Workspace Premium FZ-152",
                   "disabledForBaseLine": [
-                     { "id": 1 }
+                     { "id": "1" }
                   ],
                   "specialTypes": [],
                   "unit": "шт",

@@ -36,7 +36,6 @@ const App = () => {
 
 const Controller = () => {
     const { request } = useSelector(store => store.selected)
-    console.log(request)
     return (
         <>
             {

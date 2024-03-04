@@ -1,6 +1,6 @@
 import FinalPrice from "./FinalPrice/FinalPrice";
 import ConfigurInfo from "./ConfigurInfo/ConfigurInfo";
-import PreviewCO from "./PreviewCO/PreviewCO";
+import SendToDataBase from "./SendToDataBase/SendToDataBase";
 import ConvertPDF from "./ConvertPDF/ConvertPDF";
 import { useSelector } from "react-redux";
 import formattingOrder from "../../utils/formattingOrder";
@@ -8,7 +8,7 @@ import calculatingFinalPrice from "../../utils/calculatingFinalPrice";
 
 export default function FormOrder() {
     const { baseLine, options } = useSelector(store => store.selected)
-    const purchases = baseLine ? formattingOrder([{ ...baseLine }, ...options]) :null
+    const purchases = formattingOrder([{ ...baseLine }, ...options])
     const finalPrice = calculatingFinalPrice(purchases)
 
     return (
@@ -17,7 +17,7 @@ export default function FormOrder() {
                 {baseLine && <ConfigurInfo purchases={purchases} finalPrice={finalPrice}/>}
                 <FinalPrice finalPrice={finalPrice}/>
                 <div className="button-container">
-                    <PreviewCO />
+                    <SendToDataBase purchases={purchases}/>
                     <ConvertPDF purchases={purchases}/>
                 </div>
             </div>

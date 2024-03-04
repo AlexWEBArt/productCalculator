@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Col, InputNumber, Row, Slider } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { addValue } from '../../../../../../redux/slices/selectedSlice';
+import { addValue } from '../../../../../redux/slices/selectedSlice';
 
-export default function TypeSlider({ option, type }) {
-    const {max, min, step} = type.limits
+export default function OptionSlider({ option, limits }) {
+    const {max, min, step} = limits
     const dispatch = useDispatch()
     const { options } = useSelector(store => store.selected)
     const [disabled, setDisabled] = useState(true)

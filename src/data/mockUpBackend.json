@@ -34,7 +34,6 @@
                   "service_element": "Доп.работы",
                   "title": "Брендирование web-интерфейса",
                   "disabledForBaseLine": [],
-                  "specialTypes": [],
                   "unit": "шт",
                   "charge_type": "flat rate",
                   "price": "14400.00",
@@ -47,16 +46,11 @@
                   "service_element": "DF Workspace доп. объем",
                   "title": "DF Workspace Premium plus 1 GB",
                   "disabledForBaseLine": [],
-                  "specialTypes": [
-                     {
-                        "type": "slider",
-                        "limits": {
-                           "max": "1000",
-                           "min": "1",
-                           "step": "1"
-                        }
-                     }
-                  ],
+                  "limits": {
+                     "max": "1000",
+                     "min": "1",
+                     "step": "1"
+                  },
                   "unit": "Гб",
                   "charge_type": "flat rate",
                   "price": "5.53",
@@ -69,7 +63,7 @@
                   "service_element": "DF Workspace service",
                   "title": "DF Workspace Premium FZ-152",
                   "disabledForBaseLine": [
-                     "DF Workspace стартовый пакет"
+                     { "id": 1 }
                   ],
                   "specialTypes": [],
                   "unit": "шт",
@@ -89,16 +83,11 @@
                   "service_element": "Репозиторий (Хранилище)",
                   "title": "Backup Storage YM",
                   "disabledForBaseLine": [],
-                  "specialTypes": [
-                     {
-                        "type": "slider",
-                        "limits": {
-                           "max": "30000",
-                           "min": "100",
-                           "step": "100"
-                        }
-                     }
-                  ],
+                  "limits": {
+                     "max": "30000",
+                     "min": "100",
+                     "step": "100"
+                  },
                   "unit": "Гб",
                   "charge_type": "flat rate",
                   "price": "2",
@@ -116,16 +105,11 @@
                   "service_element": "Managed Cloud Backup",
                   "title": "Резервное копирование ВМ с администрированием",
                   "disabledForBaseLine": [],
-                  "specialTypes": [
-                     {
-                        "type": "slider",
-                        "limits": {
-                           "max": "10",
-                           "min": "1",
-                           "step": "0"
-                        }
-                     }
-                  ],
+                  "limits": {
+                     "max": "10",
+                     "min": "1",
+                     "step": "0"
+                  },
                   "unit": "ВМ",
                   "charge_type": "usage based",
                   "price": "1500.00",

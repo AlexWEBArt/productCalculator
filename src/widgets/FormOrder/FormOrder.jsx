@@ -8,7 +8,7 @@ import calculatingFinalPrice from "../../utils/calculatingFinalPrice";
 
 export default function FormOrder() {
     const { baseLine, options } = useSelector(store => store.selected)
-    const purchases = formattingOrder([{ ...baseLine }, ...options])
+    const purchases = baseLine ? formattingOrder([{ ...baseLine }, ...options]) :null
     const finalPrice = calculatingFinalPrice(purchases)
 
     return (
@@ -18,7 +18,7 @@ export default function FormOrder() {
                 <FinalPrice finalPrice={finalPrice}/>
                 <div className="button-container">
                     <PreviewCO />
-                    <ConvertPDF />
+                    <ConvertPDF purchases={purchases}/>
                 </div>
             </div>
         </section>

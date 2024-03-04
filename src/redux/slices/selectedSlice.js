@@ -3,7 +3,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 const initialState = {
     baseLine: null,
     options: [],
-    usageBased: [],
+    request: null,
 }
 
 const selectedSlice = createSlice({
@@ -35,9 +35,12 @@ const selectedSlice = createSlice({
                 }
                 return option
             })
+        },
+        sendRequst(state, action) {
+            state.request = action.payload
         }
     }
 })
 
-export const { selectBaseLine, selectOption, selectUsageBased, unSelectOption, addValue } = selectedSlice.actions;
+export const { selectBaseLine, selectOption, selectUsageBased, unSelectOption, addValue, sendRequst } = selectedSlice.actions;
 export default selectedSlice.reducer;

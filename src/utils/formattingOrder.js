@@ -1,10 +1,13 @@
+import calculatingPriceOption from "./calculatingPriceOption";
+
 export default function formattingOrder(purchases) {
+    if (!purchases[0].id) return
     return purchases.map(purchase => ({
-        id: purchase.id, 
-        quantity: purchase.quantity, 
-        unit: purchase.unit, 
+        id: purchase.id,
+        quantity: purchase.quantity,
+        unit: purchase.unit,
         title: purchase.title,
         discount: purchase.discount,
-        price: Math.round(purchase.quantity * (purchase.price - (purchase.price / 100 * (purchase.discount || 0))))
+        price: calculatingPriceOption(purchase.quantity, purchase.price, purchase.discount)
     }))
 }

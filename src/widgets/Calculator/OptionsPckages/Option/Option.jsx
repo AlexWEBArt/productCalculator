@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Tooltip, InputNumber } from 'antd';
-import SpecialType from './SpecialType/SpecialType'
 import { useDispatch, useSelector } from 'react-redux';
 import { addValue, selectOption, unSelectOption } from '../../../../redux/slices/selectedSlice';
+import OptionSlider from './OptionSlider/OptionSlider';
 
 
 export default function Option({ option }) {
@@ -15,7 +15,7 @@ export default function Option({ option }) {
 
     useEffect(() => {
         if (baseLine) {
-            const exception = option.disabledForBaseLine.find(exeption => exeption.includes(baseLine.title))
+            const exception = option.disabledForBaseLine.find(exeption => exeption.id === baseLine.id)
             if (exception) {
                 dispatch(unSelectOption(option))
                 return setDisabled(true)
@@ -68,7 +68,7 @@ export default function Option({ option }) {
             </div>
 
             {
-                Boolean(option.specialTypes.length) && <SpecialType disabled={disabled} option={option} types={option.specialTypes} />
+                option.limits && <OptionSlider option={option} limits={option.limits} />
             }
             <div className='group-item__price'>
                 <div className='price__base-price'>

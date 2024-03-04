@@ -1,6 +1,15 @@
 import React from 'react';
 import Calculator from './widgets/Calculator/Calculator';
 import FormOrder from './widgets/FormOrder/FormOrder';
+import { useSelector } from 'react-redux';
+
+const Redirect = ({request}) => {
+    return (
+        <p>
+            {JSON.stringify(request)}
+        </p>
+    )
+}
 
 const App = () => {
     return (
@@ -24,4 +33,19 @@ const App = () => {
         </div>
     )
 };
-export default App;
+
+const Controller = () => {
+    const { request } = useSelector(store => store.selected)
+    console.log(request)
+    return (
+        <>
+            {
+                request ?
+                    <Redirect request={request} />
+                    :
+                    <App />
+            }
+        </>
+    )
+}
+export default Controller;

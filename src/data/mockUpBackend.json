@@ -65,7 +65,6 @@
                   "disabledForBaseLine": [
                      { "id": "1" }
                   ],
-                  "specialTypes": [],
                   "unit": "шт",
                   "charge_type": "flat rate",
                   "price": "2500.00",

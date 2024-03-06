@@ -4,6 +4,7 @@ const initialState = {
     baseLine: null,
     options: [],
     request: null,
+    showModal: false,
 }
 
 const selectedSlice = createSlice({
@@ -38,9 +39,12 @@ const selectedSlice = createSlice({
         },
         sendRequst(state, action) {
             state.request = action.payload
+        },
+        showModal(state, action) {
+            state.showModal = action.payload
         }
     }
 })
 
-export const { selectBaseLine, selectOption, selectUsageBased, unSelectOption, addValue, sendRequst } = selectedSlice.actions;
+export const { selectBaseLine, selectOption, selectUsageBased, unSelectOption, addValue, sendRequst, showModal } = selectedSlice.actions;
 export default selectedSlice.reducer;

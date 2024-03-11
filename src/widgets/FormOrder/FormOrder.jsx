@@ -7,15 +7,15 @@ import formattingOrder from "../../utils/formattingOrder";
 import calculatingFinalPrice from "../../utils/calculatingFinalPrice";
 
 export default function FormOrder() {
-    const { baseLine, options } = useSelector(store => store.selected)
-    const allOptions = [{ ...baseLine }, ...options]
+    const { baseOption, options } = useSelector(store => store.selected)
+    const allOptions = [{ ...baseOption }, ...options]
     const purchases = formattingOrder(allOptions)
     const finalPrice = calculatingFinalPrice(purchases)
 
     return (
         <section className="widget">
             <div className="widget__form-order">
-                {baseLine && <ConfigurInfo purchases={purchases} finalPrice={finalPrice}/>}
+                {baseOption && <ConfigurInfo purchases={purchases} finalPrice={finalPrice}/>}
                 <FinalPrice finalPrice={finalPrice}/>
                 <div className="button-container">
                     <SendToDataBase purchases={purchases}/>

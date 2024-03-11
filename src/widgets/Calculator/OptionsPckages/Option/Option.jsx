@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, Tooltip, InputNumber } from 'antd';
+import { Switch, Tooltip, InputNumber, Divider } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { addValue, selectOption, unSelectOption } from '../../../../redux/slices/selectedSlice';
 import OptionSlider from './OptionSlider/OptionSlider';
+import { VerticalAlignTopOutlined } from '@ant-design/icons'
 
 
 export default function Option({ option }) {
-    const { baseLine } = useSelector(store => store.selected)
+    const { baseOption } = useSelector(store => store.selected)
 
     const [disabled, setDisabled] = useState(false)
     const [switchOff, setSwitchOff] = useState(true)
@@ -14,8 +15,8 @@ export default function Option({ option }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (baseLine) {
-            const exception = option.disabledForBaseLine.find(exeption => exeption.id === baseLine.id)
+        if (baseOption) {
+            const exception = option.disabledForBaseLine.find(exeption => exeption.id === baseOption.id)
             if (exception) {
                 dispatch(unSelectOption(option))
                 return setDisabled(true)
@@ -24,7 +25,7 @@ export default function Option({ option }) {
         } else {
             setDisabled(true)
         }
-    }, [baseLine])
+    }, [baseOption])
 
     useEffect(() => {
         if (discountValue >= 0) {
@@ -55,21 +56,23 @@ export default function Option({ option }) {
     return (
         <div className='widget__calculator__group-item'>
             <p><b>{option.service_element}</b></p>
-            <div className='group-item__controls'>
-                {
-                    disabled ?
-                        <Tooltip title={'Опция не доступна для этого пакета'}>
+            <div className='group-item__controls-wrapper'>
+                <div className='group-item__controls'>
+                    {
+                        disabled ?
+                            <Tooltip title={'Опция не доступна для этого пакета'}>
+                                <Switch disabled={disabled} onChange={onChangeOptionSwitcher} />
+                            </Tooltip>
+                            :
                             <Switch disabled={disabled} onChange={onChangeOptionSwitcher} />
-                        </Tooltip>
-                        :
-                        <Switch disabled={disabled} onChange={onChangeOptionSwitcher} />
-                }
-                <span>{option.title}</span>
+                    }
+                    <span>{option.title}</span>
+                </div>
             </div>
-
             {
                 option.limits && <OptionSlider option={option} limits={option.limits} />
             }
+            <Divider />
             <div className='group-item__price'>
                 <div className='price__base-price'>
                     <span className='group-item__price__text'>Базовая стоимость за 1{option.unit}</span>
@@ -77,18 +80,26 @@ export default function Option({ option }) {
                 </div>
                 <div className='price__discount'>
                     <span className='group-item__price__text'>Применить скидку</span>
-                    <div>
-                        <Tooltip title={'Максимальная скидка ' + option.max_discount + '%. Нажмите, что бы применить.'}>
-                            <span className='group-item__price__tooltip' onClick={handleOnClickMaxDiscount}>%</span>
-                        </Tooltip>
-                        <InputNumber 
-                            disabled={disabled || switchOff} 
-                            min={0} 
-                            max={option.max_discount} 
-                            defaultValue={0} 
-                            step={0.1} 
-                            value={discountValue} 
-                            onChange={onChangeOptionDiscount} 
+                    <div className='price__discount__input-wrapper'>
+                        {
+                            disabled || switchOff ?
+                                <Tooltip title={'Максимальная скидка ' + option.max_discount + '%. Нажмите, что бы применить.'}>
+                                    <span className='group-item__price__tooltip' style={{backgroundColor: 'rgba(0, 0, 0, 0.25)'}} onClick={handleOnClickMaxDiscount}><VerticalAlignTopOutlined /></span>
+                                </Tooltip>
+                                :
+                                <Tooltip title={'Максимальная скидка ' + option.max_discount + '%. Нажмите, что бы применить.'}>
+                                    <span className='group-item__price__tooltip' onClick={handleOnClickMaxDiscount}><VerticalAlignTopOutlined /></span>
+                                </Tooltip>
+                        }
+
+                        <InputNumber
+                            disabled={disabled || switchOff}
+                            min={0}
+                            max={option.max_discount}
+                            defaultValue={0}
+                            step={0.1}
+                            value={discountValue}
+                            onChange={onChangeOptionDiscount}
                         />
                     </div>
                 </div>

@@ -1,9 +1,58 @@
 import React from 'react';
 import Calculator from './widgets/Calculator/Calculator';
 import FormOrder from './widgets/FormOrder/FormOrder';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
+// import * as products from '../../data/mockUpBackend.json'
+// import Service from "./Service/Service"
+import { productsList } from './redux/thunks/productsListThunk'
+import { useEffect } from 'react'
+import { Alert, Skeleton, Spin } from 'antd';
 
-const Redirect = ({request}) => {
+
+const PreloaderApp = () => {
+    return (
+        <>
+            <div>
+                <Skeleton.Node
+                    // active={loading}
+                    style={{
+                        width: '750px',
+                        height: '10vh',
+                        margin: '10px',
+                        padding: '10px',
+                        borderRadius: 10
+                    }}>
+                    <Spin size='small' />
+                </Skeleton.Node>
+                <Skeleton.Node
+                    // active={loading}
+                    style={{
+                        width: '750px',
+                        height: '60vh',
+                        margin: '10px',
+                        padding: '10px',
+                        borderRadius: 10
+                    }}>
+                    <Spin size='large' />
+                </Skeleton.Node>
+            </div>
+            <Skeleton.Node
+                // active={loading}
+                style={{
+                    width: '450px',
+                    height: '30vh',
+                    margin: '10px',
+                    padding: '10px',
+                    borderRadius: 10
+                }}>
+                <Spin />
+            </Skeleton.Node>
+        </>
+    )
+}
+
+const Redirect = ({ request }) => {
     return (
         <p>
             {JSON.stringify(request)}
@@ -12,6 +61,15 @@ const Redirect = ({request}) => {
 }
 
 const App = () => {
+    const dispatch = useDispatch()
+    const { products, loading, error } = useSelector(store => store.products)
+
+    useEffect(() => {
+        if (products.length === 0) {
+            dispatch(productsList())
+        }
+    }, [products])
+
     return (
         <div className="app">
             <header className='header'>
@@ -21,8 +79,15 @@ const App = () => {
             </header>
             <main className='main'>
                 <div className='main__content'>
-                    <Calculator />
-                    <FormOrder />
+                    {
+                        loading ?
+                                <PreloaderApp />
+                            :
+                            <>
+                                <Calculator products={products} error={error} />
+                                <FormOrder />
+                            </>
+                    }
                 </div>
             </main>
             <footer className='footer'>

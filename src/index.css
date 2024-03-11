@@ -13,34 +13,7 @@ body {
   font-family: 'BeelineSans-Regular';
   place-items: center;
   min-width: 320px;
-}
-
-table {
-  /* border: 2px solid rgb(140 140 140); */
-  font:
-    16px "Open Sans",
-    Helvetica,
-    Arial,
-    sans-serif;
-
-}
-
-.left {
-  text-align: left;
-}
-
-th, td {
-  padding: 8px;
-}
-
-thead>tr,
-tfoot>tr {
-  background-color: rgb(228 240 245);
-}
-
-th,
-td {
-  border: 1px solid rgb(160 160 160);
+  overflow-y:scroll;
 }
 
 .header {
@@ -102,6 +75,10 @@ h4.sub-title {
 }
 
 .widget__calculator {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.25);
   margin: 10px;
   
@@ -122,22 +99,59 @@ h4.sub-title {
 
 .widget__calculator__basicPackages {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.basicPackages__group-wrapper {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.widget__calculator__group-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .widget__calculator__group-item {
   display: flex;
+  width: 46%;
   flex-direction: column;
+  justify-content: space-between;
+
   padding: 15px 10px;
   margin: 5px 0;
   box-shadow: 0 0 1px 0;
   border-radius: 10px;
 }
 
+.widget__calculator__group-item:only-child {
+  width: 100%;
+}
+
+.widget__calculator__group:has(.widget__calculator__group-item:only-child) {
+  width: 47%;
+}
+
 .widget__calculator__group-item p {
   text-align: center;
 }
 
+.widget__calculator__products {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.products__button:hover {
+  cursor: not-allowed;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.widget__calculator__products,
 .widget__calculator__group,
 .widget__form-order__price-prewiew,
 .widget__form-order__final-price,
@@ -148,17 +162,14 @@ h4.sub-title {
   border-radius: 10px;
 }
 
-.widget__calculator__group:last-child,
-.widget__form-order__price-prewiew:last-child,
-.widget__form-order__final-price:last-child,
-.button-container:last-child {
-  margin-bottom: 0;
+.group-item__controls-wrapper {
+  height: 100%;
 }
 
 .group-item__controls {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  height: 45px;
 }
 
 .group-item__controls span {
@@ -171,6 +182,16 @@ h4.sub-title {
   justify-content: space-between;
   align-items: center;
   margin-top: 5px;
+}
+
+.price__discount__input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.widget__calculator__basicPackages .group-item__price {
+  width: fit-content;
+  margin: auto;
 }
 
 .price__base-price .group-item__price__text:last-child {
@@ -197,6 +218,21 @@ h4.sub-title {
   color: #f5f5f5;
   background-color: #1677ff;
   cursor: pointer;
+}
+
+.animation-node-enter {
+  opacity: 0;
+}
+.animation-node-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+.animation-node-exit {
+  opacity: 1;
+}
+.animation-node-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms;
 }
 
 .price-prewiew__text-container,

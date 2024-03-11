@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Divider } from 'antd';
-import BasicPackages from '../BasicPackages/BasicPackages';
+import BasicOption from '../BasicOption/BasicOption';
 import OptionsPckages from '../OptionsPckages/OptionsPckages';
 
 export default function Service({service}) {
-    const { serviceName, baseLine, options } = service
+    const { serviceName, baseOptions, options } = service
+    const [hasBaseOption] = useState(baseOptions ? true : false) 
 
     return (
         <div className='widget__calculator__group'>
             {
-                baseLine && (
+                hasBaseOption && (
                     <>
                         <h3 className='sub-title'>Базовый пакет</h3>
                         <h4 className='sub-title' style={{textAlign: 'center'}}>{serviceName}</h4>
-                        <BasicPackages baseline={baseLine}/>
+                        <BasicOption options={baseOptions}/>
                         <Divider/>
                     </>
                 )
             }
-            <h4 className='sub-title'>Дополнительные опции</h4>
+            {
+                
+            }
+            <h4 className='sub-title'>
+                {hasBaseOption ? 'Дополнительные опции' : 'Cервис'}
+            </h4>
             <OptionsPckages options={options} />
         </div>
     )

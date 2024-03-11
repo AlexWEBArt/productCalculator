@@ -7,11 +7,18 @@ export default function FinalPrice({ finalPrice }) {
         <>
             <div className="widget__form-order__final-price">
                 <span>
-                    {tax || 0} &#8381; (НДС)
+                    Итого
                 </span>
-                +
                 <span>
                     {finalPrice || 0} &#8381;
+                </span>
+            </div>
+            <div className="widget__form-order__final-price">
+                <span>
+                    НДС
+                </span>
+                <span>
+                    {tax || 0} &#8381;
                 </span>
             </div>
             <div className="widget__form-order__final-price">
@@ -20,7 +27,7 @@ export default function FinalPrice({ finalPrice }) {
                 </span>
                 <span>
                     <b>
-                    {finalPrice + tax || 0} &#8381;
+                        {finalPrice + tax || 0} &#8381;
                     </b>
                 </span>
             </div>

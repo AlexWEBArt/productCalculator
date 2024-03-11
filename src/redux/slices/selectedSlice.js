@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
-    baseLine: null,
+    baseOption: null,
     options: [],
     request: null,
     showModal: false,
@@ -11,8 +11,14 @@ const selectedSlice = createSlice({
     name: 'selected',
     initialState,
     reducers: {
-        selectBaseLine(state, action) {
-            state.baseLine = action.payload;
+        selectBaseOption(state, action) {
+            state.baseOption = action.payload;
+        },
+        addDiscountBaseOption(state, action) {
+            state.baseOption = {
+                ...current(state).baseOption,
+                discount: action.payload
+            }
         },
         selectOption(state, action) {
             state.options.push(action.payload)
@@ -46,5 +52,5 @@ const selectedSlice = createSlice({
     }
 })
 
-export const { selectBaseLine, selectOption, selectUsageBased, unSelectOption, addValue, sendRequst, showModal } = selectedSlice.actions;
+export const { selectBaseOption, addDiscountBaseOption, selectOption, selectUsageBased, unSelectOption, addValue, sendRequst, showModal } = selectedSlice.actions;
 export default selectedSlice.reducer;

@@ -4,7 +4,7 @@
       "services": [
          {
             "serviceName": "DF Workspace Premium",
-            "baseLine": [
+            "baseOptions": [
                {
                   "id": "1",
                   "service_element": "DF Workspace стартовый пакет",

@@ -1,8 +1,4 @@
-import calculatingTax from "../../../utils/calculatingTax";
-
-export default function FinalPrice({ finalPrice }) {
-    const tax = calculatingTax(finalPrice)
-
+export default function FinalPrice({ finalPrice, tax }) {
     return (
         <>
             <div className="widget__form-order__final-price">

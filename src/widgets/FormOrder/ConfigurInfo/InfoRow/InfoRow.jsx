@@ -46,12 +46,12 @@ export default function InfoRow({ purchase }) {
                             purchase.discount ?
                                 <Tooltip title={'Применена скидка ' + purchase.discount + '%.'}>
                                     <span style={{ color: '#A30000' }}>
-                                        {purchase.price} &#8381;
+                                        {purchase.calculatedPrice} &#8381;
                                     </span>
                                 </Tooltip>
                                 :
                                 <>
-                                    {purchase.price} &#8381;
+                                    {purchase.calculatedPrice} &#8381;
                                 </>
                         }
 

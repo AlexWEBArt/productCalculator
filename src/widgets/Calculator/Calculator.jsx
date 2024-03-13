@@ -8,7 +8,7 @@ export default function Calculator({ products, error }) {
     if (error) {
         return (
             <section className="widget">
-                <div className="widget__calculator">
+                <div className="error__container">
                     <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                     <div style={{ textAlign: 'center', color: '#A30000' }}>{error}</div>
                 </div>

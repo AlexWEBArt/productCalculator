@@ -1,10 +1,9 @@
 import { Text, View } from '@react-pdf/renderer';
 import styles from '../Styles.js';
+import calculatingPriceOption from '../../../../../utils/calculatingPriceOption.js';
 
-export default function Cost({ allOptions }) {
-    let finalPrice = 0
-    let tax = 0
-
+export default function Cost({ finalPrice, tax, purchases }) {
+    if (!finalPrice) return null
     return (
         <View style={styles.cost}>
             <Text style={styles.h1}>Расчет стоимости</Text>
@@ -42,11 +41,7 @@ export default function Cost({ allOptions }) {
                     </View>
                 </View>
                 {
-                    allOptions.map(option => {
-                        const priceWithDiscount = option.price - (option.price / 100 * option.discount)
-                        const priceAll = priceWithDiscount ? Math.round(priceWithDiscount * option.quantity) : option.price * option.quantity
-                        finalPrice += priceAll
-                        tax = finalPrice / 100 * 20
+                    purchases.map(option => {
                         return (
                             <View key={option.id} style={styles.row}>
                                 <View key={option.id} style={styles.costCell}>
@@ -71,19 +66,18 @@ export default function Cost({ allOptions }) {
                                 </View>
                                 <View key={option.id} style={styles.costCell}>
                                     <Text style={styles.costCellText}>
-                                        {priceWithDiscount ? priceWithDiscount.toFixed(2) : option.price}
+                                        {option.price}
                                     </Text>
                                 </View>
                                 <View key={option.id} style={styles.costCell}>
                                     <Text style={styles.costCellText}>
-                                        {priceAll.toFixed(2)}
+                                        {option.calculatedPrice}
                                     </Text>
                                 </View>
                             </View>
                         )
                     })
                 }
-
                 <View style={styles.row}>
                     <View style={[styles.costCell, styles.costColspan5]}>
                         <Text style={styles.costCellText}>
@@ -92,7 +86,7 @@ export default function Cost({ allOptions }) {
                     </View>
                     <View style={styles.costCell}>
                         <Text style={styles.costCellText}>
-                            {finalPrice.toFixed(2)}
+                            {finalPrice}
                         </Text>
                     </View>
                 </View>
@@ -104,7 +98,7 @@ export default function Cost({ allOptions }) {
                     </View>
                     <View style={styles.costCell}>
                         <Text style={styles.costCellText}>
-                            {tax.toFixed(2)}
+                            {tax}
                         </Text>
                     </View>
                 </View>
@@ -116,7 +110,7 @@ export default function Cost({ allOptions }) {
                     </View>
                     <View style={[styles.costCell, { borderBottomRightRadius: 25 }]}>
                         <Text style={styles.costCellText}>
-                            {(finalPrice + tax).toFixed(2)}
+                            {finalPrice + tax}
                         </Text>
                     </View>
                 </View>

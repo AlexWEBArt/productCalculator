@@ -9,12 +9,13 @@ export default function OptionSlider({ option, limits }) {
     const { options } = useSelector(store => store.selected)
     const [disabled, setDisabled] = useState(true)
     const [inputValue, setInputValue] = useState(Number(min));
-
+    
     useEffect(() => {
         if (options.find(item => item.id === option.id)) {
             setDisabled(false)
         } else {
             setDisabled(true)
+            setInputValue(Number(min))
         }
     }, [options])
 

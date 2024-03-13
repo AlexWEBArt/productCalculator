@@ -86,6 +86,14 @@ h4.sub-title {
   padding: 10px;
 }
 
+.error__container {
+  background-color: rgba(0, 0, 0, 0.25);
+  margin: 10px;
+  
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .widget__form-order {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.25);
@@ -218,6 +226,11 @@ h4.sub-title {
   color: #f5f5f5;
   background-color: #1677ff;
   cursor: pointer;
+}
+
+.group-item__price__tooltip:hover {
+  transition: 400ms;
+  background-color: #A30000;
 }
 
 .animation-node-enter {

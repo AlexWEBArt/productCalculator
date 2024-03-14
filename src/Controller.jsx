@@ -1,13 +1,10 @@
 import React from 'react';
 import Calculator from './widgets/Calculator/Calculator';
 import FormOrder from './widgets/FormOrder/FormOrder';
-// import { useSelector } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux'
-// import * as products from '../../data/mockUpBackend.json'
-// import Service from "./Service/Service"
 import { productsList } from './redux/thunks/productsListThunk'
 import { useEffect } from 'react'
-import { Alert, Skeleton, Spin } from 'antd';
+import { Skeleton, Spin } from 'antd';
 
 
 const PreloaderApp = () => {
@@ -15,7 +12,6 @@ const PreloaderApp = () => {
         <>
             <div>
                 <Skeleton.Node
-                    // active={loading}
                     style={{
                         width: '750px',
                         height: '10vh',
@@ -26,7 +22,6 @@ const PreloaderApp = () => {
                     <Spin size='small' />
                 </Skeleton.Node>
                 <Skeleton.Node
-                    // active={loading}
                     style={{
                         width: '750px',
                         height: '60vh',
@@ -38,7 +33,6 @@ const PreloaderApp = () => {
                 </Skeleton.Node>
             </div>
             <Skeleton.Node
-                // active={loading}
                 style={{
                     width: '450px',
                     height: '30vh',

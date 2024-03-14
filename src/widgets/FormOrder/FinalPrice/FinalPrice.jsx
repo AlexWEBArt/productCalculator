@@ -1,3 +1,5 @@
+import CountUp from "react-countup";
+
 export default function FinalPrice({ finalPrice, tax }) {
     return (
         <>
@@ -6,7 +8,13 @@ export default function FinalPrice({ finalPrice, tax }) {
                     Итого
                 </span>
                 <span>
-                    {finalPrice || 0} &#8381;
+                    {<CountUp duration={0.3} start={0} end={finalPrice || 0} suffix=" &#8381;" decimals={2}>
+                        {({ countUpRef, start }) => (
+                            <div>
+                                <span ref={countUpRef} />
+                            </div>
+                        )}
+                    </CountUp>}
                 </span>
             </div>
             <div className="widget__form-order__final-price">
@@ -14,7 +22,13 @@ export default function FinalPrice({ finalPrice, tax }) {
                     НДС
                 </span>
                 <span>
-                    {tax || 0} &#8381;
+                    {<CountUp duration={0.3} start={0} end={tax || 0} suffix=" &#8381;" decimals={2}>
+                        {({ countUpRef, start }) => (
+                            <div>
+                                <span ref={countUpRef} />
+                            </div>
+                        )}
+                    </CountUp>}
                 </span>
             </div>
             <div className="widget__form-order__final-price">
@@ -23,7 +37,13 @@ export default function FinalPrice({ finalPrice, tax }) {
                 </span>
                 <span>
                     <b>
-                        {finalPrice + tax || 0} &#8381;
+                        {<CountUp duration={0.3} start={0} end={(finalPrice + tax) || 0} suffix=" &#8381;" decimals={2}>
+                            {({ countUpRef, start }) => (
+                                <div>
+                                    <span ref={countUpRef} />
+                                </div>
+                            )}
+                        </CountUp>}
                     </b>
                 </span>
             </div>

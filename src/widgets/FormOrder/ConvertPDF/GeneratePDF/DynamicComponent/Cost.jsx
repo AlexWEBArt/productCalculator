@@ -34,7 +34,7 @@ export default function Cost({ finalPrice, tax, purchases }) {
                             Цена за единицу
                         </Text>
                     </View>
-                    <View style={[styles.costCell, { borderTopRightRadius: 25 }]}>
+                    <View style={[styles.costCell, styles.costCellRight, { borderTopRightRadius: 25 }]}>
                         <Text style={styles.costCellText}>
                             Стоимость, всего в руб. без учета НДС
                         </Text>
@@ -69,7 +69,7 @@ export default function Cost({ finalPrice, tax, purchases }) {
                                         {option.price}
                                     </Text>
                                 </View>
-                                <View key={option.id} style={styles.costCell}>
+                                <View key={option.id} style={[styles.costCell, styles.costCellRight]}>
                                     <Text style={styles.costCellText}>
                                         {option.calculatedPrice}
                                     </Text>
@@ -84,7 +84,7 @@ export default function Cost({ finalPrice, tax, purchases }) {
                             Всего без НДС
                         </Text>
                     </View>
-                    <View style={styles.costCell}>
+                    <View style={[styles.costCell, styles.costCellRight]}>
                         <Text style={styles.costCellText}>
                             {finalPrice}
                         </Text>
@@ -96,19 +96,19 @@ export default function Cost({ finalPrice, tax, purchases }) {
                             НДС 20%
                         </Text>
                     </View>
-                    <View style={styles.costCell}>
+                    <View style={[styles.costCell, styles.costCellRight]}>
                         <Text style={styles.costCellText}>
                             {tax}
                         </Text>
                     </View>
                 </View>
                 <View style={styles.row}>
-                    <View style={[styles.costCell, styles.costColspan5, { borderBottomLeftRadius: 25 }]}>
+                    <View style={[styles.costCell, styles.costColspan5, styles.costCellBottom, { borderBottomLeftRadius: 25 }]}>
                         <Text style={styles.costCellText}>
                             Итого, с учетом НДС
                         </Text>
                     </View>
-                    <View style={[styles.costCell, { borderBottomRightRadius: 25 }]}>
+                    <View style={[styles.costCell, styles.costCellBottom, styles.costCellRight, { borderBottomRightRadius: 25 }]}>
                         <Text style={styles.costCellText}>
                             {finalPrice + tax}
                         </Text>

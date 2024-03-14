@@ -121,7 +121,14 @@ const styles = StyleSheet.create({
     costCell: {
         justifyContent: 'center',
         width: '16.66%',
-        border: '1px solid #151515',
+        borderLeft: '1px solid #151515',
+        borderTop: '1px solid #151515',
+    },
+    costCellRight: {
+        borderRight: '1px solid #151515',
+    },
+    costCellBottom: {
+        borderBottom: '1px solid #151515',
     },
     costCellText: {
         color: '#151515',

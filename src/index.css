@@ -226,6 +226,7 @@ h4.sub-title {
   color: #f5f5f5;
   background-color: #1677ff;
   cursor: pointer;
+  transition: 400ms;
 }
 
 .group-item__price__tooltip:hover {
@@ -252,19 +253,20 @@ h4.sub-title {
 .widget__form-order__final-price {
   display: flex;
   justify-content: space-between;
+  width: 390px;
   margin-bottom: 20px;
 }
 
 .text-container__quantity {
-  flex: 1;
-}
-
-.text-container__name {
   flex: 3;
 }
 
+.text-container__name {
+  flex: 9;
+}
+
 .text-container__price {
-  flex: 1;
+  flex: 4;
   text-align: right;
 }
 

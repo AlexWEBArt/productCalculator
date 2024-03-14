@@ -107,7 +107,7 @@
                   "limits": {
                      "max": "10",
                      "min": "1",
-                     "step": "0"
+                     "step": "1"
                   },
                   "unit": "ВМ",
                   "charge_type": "usage based",

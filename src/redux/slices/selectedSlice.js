@@ -5,6 +5,7 @@ const initialState = {
     options: [],
     request: null,
     showModal: false,
+    dataCO: null,
 }
 
 const selectedSlice = createSlice({
@@ -48,9 +49,12 @@ const selectedSlice = createSlice({
         },
         showModal(state, action) {
             state.showModal = action.payload
+        },
+        formForCO(state, action) {
+            state.dataCO = action.payload
         }
     }
 })
 
-export const { selectBaseOption, addDiscountBaseOption, selectOption, selectUsageBased, unSelectOption, addValue, sendRequst, showModal } = selectedSlice.actions;
+export const { selectBaseOption, addDiscountBaseOption, selectOption, selectUsageBased, unSelectOption, addValue, sendRequst, showModal, formForCO } = selectedSlice.actions;
 export default selectedSlice.reducer;

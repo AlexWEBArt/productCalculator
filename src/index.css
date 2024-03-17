@@ -1,11 +1,11 @@
 @font-face {
-	font-family: 'BeelineSans-Regular'; 
-	src: url(./assets/fonts/BeelineSans-Regular.woff); 
+  font-family: 'BeelineSans-Regular';
+  src: url(./assets/fonts/BeelineSans-Regular.woff);
 }
 
 @font-face {
-	font-family: 'CraftworkGrotesk-Regular'; 
-	src: url(./assets/fonts/CraftworkGrotesk-Regular.woff); 
+  font-family: 'CraftworkGrotesk-Regular';
+  src: url(./assets/fonts/CraftworkGrotesk-Regular.woff);
 }
 
 body {
@@ -13,12 +13,12 @@ body {
   font-family: 'BeelineSans-Regular';
   place-items: center;
   min-width: 320px;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 .header {
   position: fixed;
-  z-index: 2;
+  z-index: 1080;
   height: 64px;
   width: 100%;
 
@@ -81,7 +81,7 @@ h4.sub-title {
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.25);
   margin: 10px;
-  
+
   border-radius: 10px;
   padding: 10px;
 }
@@ -89,7 +89,7 @@ h4.sub-title {
 .error__container {
   background-color: rgba(0, 0, 0, 0.25);
   margin: 10px;
-  
+
   border-radius: 10px;
   padding: 10px;
 }
@@ -98,7 +98,7 @@ h4.sub-title {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.25);
   margin: 10px;
-  
+
   border-radius: 10px;
   padding: 10px;
   font-family: 'CraftworkGrotesk-Regular';
@@ -237,13 +237,16 @@ h4.sub-title {
 .animation-node-enter {
   opacity: 0;
 }
+
 .animation-node-enter-active {
   opacity: 1;
   transition: opacity 1000ms;
 }
+
 .animation-node-exit {
   opacity: 1;
 }
+
 .animation-node-exit-active {
   opacity: 0;
   transition: opacity 1000ms;
@@ -275,7 +278,7 @@ h4.sub-title {
   justify-content: space-between;
 }
 
-.button-container > .button-wrapper {
+.button-container>.button-wrapper {
   margin: 0 10px
 }
 
@@ -300,8 +303,98 @@ h4.sub-title {
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 1199px) {
   .main__content {
     flex-direction: column;
+  }
+
+  .widget__calculator {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .widget__calculator__products {
+    box-sizing: border-box;
+  }
+
+  .widget__calculator__group-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .widget__calculator__group-item {
+    width: 100%;
+    box-sizing: border-box;
+    border: rgba(0, 0, 0, 0.25) solid 1px;
+    box-shadow: none;
+  }
+
+  .widget__calculator__group:has(.widget__calculator__group-item:only-child) {
+    width: auto;
+  }
+
+  :where(.css-dev-only-do-not-override-1drr2mu).ant-radio-group {
+    display: flex !important;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 80%;
+    margin: auto;
+  }
+
+  :where(.css-dev-only-do-not-override-1drr2mu).ant-radio-button-wrapper:first-child {
+    border-start-end-radius: 6px;
+    border-end-end-radius: 6px;
+  }
+
+  :where(.css-dev-only-do-not-override-1drr2mu).ant-radio-button-wrapper:last-child {
+    margin-top: 10px;
+    border-inline-start: 1px solid #d9d9d9;
+    border-start-start-radius: 6px;
+    border-end-start-radius: 6px;
+  }
+
+  :where(.css-dev-only-do-not-override-1drr2mu).ant-radio-button-wrapper:last-child::before {
+    display: none;
+  }
+
+  :where(.css-dev-only-do-not-override-1drr2mu).ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    border-color: #1677ff !important;
+  }
+
+  .widget__form-order {
+    position: fixed;
+    z-index: 1080;
+    bottom: 0;
+    left: calc(2.5% - 10px);
+    width: 95%;
+    box-sizing: border-box;
+
+    overflow: hidden;
+    transform: translateY(0%);
+    transition: transform 300ms linear;
+  }
+
+  .widget__form-order__price-prewiew::before {
+    content: '\25BC';
+    position: absolute;
+    z-index: 0;
+    top: 30px;
+    right: 20px;
+  }
+
+  .collapsed .widget__form-order__price-prewiew::before {
+    content: '\25B2';
+  }
+
+  .collapsed {
+    transform: translateY(85%);
+  }
+
+  .price-prewiew__text-container {
+    width: auto;
+  }
+
+  .widget__form-order__final-price {
+    width: auto;
   }
 }

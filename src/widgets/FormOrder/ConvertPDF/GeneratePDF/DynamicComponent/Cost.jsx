@@ -1,8 +1,7 @@
 import { Text, View } from '@react-pdf/renderer';
 import styles from '../Styles.js';
-import calculatingPriceOption from '../../../../../utils/calculatingPriceOption.js';
 
-export default function Cost({ finalPrice, tax, purchases }) {
+export default function Cost({ finalPrice, tax, purchases, dataCO }) {
     if (!finalPrice) return null
     return (
         <View style={styles.cost}>
@@ -117,10 +116,10 @@ export default function Cost({ finalPrice, tax, purchases }) {
             </View>
             <View style={styles.footer}>
                 <Text style={styles.footerText}>
-                    Актуально на: 2023-06-01
+                    Актуально на: {dataCO.DatePicker}
                 </Text>
                 <Text style={styles.footerText}>
-                    Менеджер: Иванов Иван Иванович
+                    Менеджер: {dataCO.InputOperatorName}
                 </Text>
             </View>
         </View>

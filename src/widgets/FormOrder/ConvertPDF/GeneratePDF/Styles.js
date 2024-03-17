@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     costCell: {
         justifyContent: 'center',
         width: '16.66%',
+        overflow: 'hidden',
         borderLeft: '1px solid #151515',
         borderTop: '1px solid #151515',
     },

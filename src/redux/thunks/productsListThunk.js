@@ -4,7 +4,7 @@ import * as products from '../../data/mockUpBackend.json'
 export const productsList = createAsyncThunk('products', async (params, { rejectWithValue }) => {
     // const response = await fetch(`url get request`);
 
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
     let response
 

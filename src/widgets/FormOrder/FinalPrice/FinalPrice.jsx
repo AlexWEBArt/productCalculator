@@ -8,7 +8,7 @@ export default function FinalPrice({ finalPrice, tax }) {
                     Итого
                 </span>
                 <span>
-                    {<CountUp duration={0.3} start={0} end={finalPrice || 0} suffix=" &#8381;" decimals={2}>
+                    {<CountUp duration={0.4} start={0} end={finalPrice || 0} suffix=" &#8381;" decimals={2}>
                         {({ countUpRef, start }) => (
                             <div>
                                 <span ref={countUpRef} />
@@ -22,7 +22,7 @@ export default function FinalPrice({ finalPrice, tax }) {
                     НДС
                 </span>
                 <span>
-                    {<CountUp duration={0.3} start={0} end={tax || 0} suffix=" &#8381;" decimals={2}>
+                    {<CountUp duration={0.5} start={0} end={tax || 0} suffix=" &#8381;" decimals={2}>
                         {({ countUpRef, start }) => (
                             <div>
                                 <span ref={countUpRef} />

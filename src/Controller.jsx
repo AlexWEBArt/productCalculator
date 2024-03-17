@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Calculator from './widgets/Calculator/Calculator';
 import FormOrder from './widgets/FormOrder/FormOrder';
 import { useDispatch, useSelector } from 'react-redux'
 import { productsList } from './redux/thunks/productsListThunk'
-import { useEffect } from 'react'
 import { Skeleton, Spin } from 'antd';
 
 
 const PreloaderApp = () => {
+    const [width, setWidth] = useState(window.innerWidth);
+
+    function handleWindowSizeChange() {
+        setWidth(window.innerWidth);
+    }
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
+    const isMobile = width <= 1199;
     return (
         <>
             <div>
                 <Skeleton.Node
-                    style={{
+                    style={isMobile ? {
+                        width: '90vw',
+                        height: '10vh',
+                        margin: '10px',
+                        marginLeft: '5vw',
+                        padding: '10px',
+                        borderRadius: 10
+                    } : {
                         width: '750px',
                         height: '10vh',
                         margin: '10px',
@@ -22,7 +41,14 @@ const PreloaderApp = () => {
                     <Spin size='small' />
                 </Skeleton.Node>
                 <Skeleton.Node
-                    style={{
+                    style={isMobile ? {
+                        width: '90vw',
+                        height: '60vh',
+                        margin: '10px',
+                        marginLeft: '5vw',
+                        padding: '10px',
+                        borderRadius: 10
+                    } : {
                         width: '750px',
                         height: '60vh',
                         margin: '10px',
@@ -33,7 +59,14 @@ const PreloaderApp = () => {
                 </Skeleton.Node>
             </div>
             <Skeleton.Node
-                style={{
+                style={isMobile ? {
+                    width: '90vw',
+                    height: '30vh',
+                    margin: '10px',
+                    marginLeft: '5vw',
+                    padding: '10px',
+                    borderRadius: 10
+                } : {
                     width: '450px',
                     height: '30vh',
                     margin: '10px',
@@ -75,7 +108,7 @@ const App = () => {
                 <div className='main__content'>
                     {
                         loading ?
-                                <PreloaderApp />
+                            <PreloaderApp />
                             :
                             <>
                                 <Calculator products={products} error={error} />

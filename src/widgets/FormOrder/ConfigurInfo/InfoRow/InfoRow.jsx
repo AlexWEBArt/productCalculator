@@ -1,6 +1,5 @@
 import { Tooltip } from "antd"
 import { useRef } from "react";
-import CountUp from "react-countup";
 import { Transition } from "react-transition-group"
 
 const duration = 300;
@@ -47,24 +46,12 @@ export default function InfoRow({ purchase }) {
                             purchase.discount ?
                                 <Tooltip title={'Применена скидка ' + purchase.discount + '%.'}>
                                     <span style={{ color: '#A30000' }}>
-                                        {<CountUp duration={0.3} start={0} end={purchase.calculatedPrice} suffix=" &#8381;" decimals={2}>
-                                        {({ countUpRef, start }) => (
-                                            <div>
-                                                <span ref={countUpRef} />
-                                            </div>
-                                        )}
-                                    </CountUp>}
+                                        {purchase.calculatedPrice} &#8381;
                                     </span>
                                 </Tooltip>
                                 :
                                 <>
-                                    {<CountUp duration={0.3} start={0} end={purchase.calculatedPrice} suffix=" &#8381;" decimals={2} >
-                                        {({ countUpRef, start }) => (
-                                            <div>
-                                                <span ref={countUpRef} />
-                                            </div>
-                                        )}
-                                    </CountUp>} 
+                                    {purchase.calculatedPrice} &#8381;
                                 </>
                         }
 

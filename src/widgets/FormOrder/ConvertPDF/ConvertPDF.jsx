@@ -11,6 +11,19 @@ export default function ConvertPDF({ finalPrice, tax, purchases }) {
   const [disabled, setDisabled] = useState(true)
   const dispatch = useDispatch()
 
+  const [width, setWidth] = useState(window.innerWidth);
+
+  function handleWindowSizeChange() {
+      setWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    }
+  }, []);
+  const isMobile = width <= 1199;
 
   useEffect(() => {
     if (!finalPrice) {
@@ -30,7 +43,7 @@ export default function ConvertPDF({ finalPrice, tax, purchases }) {
 
   return (
     <div className="button-wrapper">
-      <Button type="primary" disabled={disabled} onClick={showModal}>Сконвертировать в PDF</Button>
+      {!isMobile && <Button type="primary" disabled={disabled} onClick={showModal}>Сконвертировать в PDF</Button>}
       <Modal title="Коммерческое предложение" width={'fit-content'} open={isModalOpen} footer={null} onCancel={handleCancel}>
         {
           dataCO ?

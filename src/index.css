@@ -397,4 +397,8 @@ h4.sub-title {
   .widget__form-order__final-price {
     width: auto;
   }
+
+  .button-container {
+    justify-content: center;
+  }
 }

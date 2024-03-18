@@ -19,7 +19,6 @@ const formItemLayout = {
     },
 };
 
-
 export default function FormToGenerate() {
     const dispatch = useDispatch()
 
@@ -41,7 +40,7 @@ export default function FormToGenerate() {
                 }}
                 initialValues={{
                     InputCompanyName: 'Ромашка',
-                    DataPicker: dayjs('2024-03-15', dateFormat),
+                    DatePicker: dayjs(),
                     InputOperatorName: 'Иванов Иван Иванович'
                 }}
                 onFinish={(e) => handleSubmitFormForCO(e)}

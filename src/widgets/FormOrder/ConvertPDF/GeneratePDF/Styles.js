@@ -1,8 +1,8 @@
-import font from '../../../../assets/fonts/Roboto-Regular.ttf'
+import font from '../../../../assets/fonts/CraftworkGrotesk-Regular.ttf'
 import { StyleSheet, Font } from '@react-pdf/renderer';
 
 Font.register({
-    family: "Roboto",
+    family: "CraftworkGrotesk",
     format: "truetype",
     src: font
 });
@@ -10,7 +10,7 @@ Font.register({
 // Create styles
 const styles = StyleSheet.create({
     document: {
-        fontFamily: 'Roboto',
+        fontFamily: 'CraftworkGrotesk',
         fontSize: 8,
     },
     space: {

@@ -1,6 +1,7 @@
 import { Tooltip } from "antd"
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { Transition } from "react-transition-group"
+import { Purchase } from "../../FormOrder";
 
 const duration = 300;
 
@@ -14,9 +15,10 @@ const transitionStyles = {
     entered: { opacity: 1 },
     exiting: { opacity: 0 },
     exited: { opacity: 0 },
+    unmounted: { opacity: 0 },
 };
 
-export default function InfoRow({ purchase }) {
+const InfoRow: React.FC<{purchase: Purchase}> = ({ purchase }) => {
     const nodeRef = useRef(null);
     return (
         <Transition
@@ -61,3 +63,5 @@ export default function InfoRow({ purchase }) {
         </Transition>
     )
 }
+
+export default InfoRow

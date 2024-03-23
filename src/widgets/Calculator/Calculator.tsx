@@ -2,7 +2,6 @@ import Service from "./Service/Service"
 import { Empty } from 'antd'
 import { RightCircleFilled, LeftCircleFilled } from '@ant-design/icons'
 
-
 export default function Calculator({ products, error }) {
 
     if (error) {
@@ -25,10 +24,12 @@ export default function Calculator({ products, error }) {
             <div className="widget__calculator">
                 <div className='widget__calculator__products'>
                     <div className="products__button">
+                        {/* @ts-ignore: Unreachable code error */}
                         <LeftCircleFilled style={{ color: "rgba(0, 0, 0, 0.40)", fontSize: 30 }} />
                     </div>
                     <h1 className='sub-title'>{product}</h1>
                     <div className="products__button">
+                        {/* @ts-ignore: Unreachable code error */}
                         <RightCircleFilled style={{ color: "rgba(0, 0, 0, 0.40)", fontSize: 30 }} />
                     </div>
                 </div>

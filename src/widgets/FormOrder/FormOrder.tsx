@@ -2,16 +2,27 @@ import FinalPrice from "./FinalPrice/FinalPrice";
 import ConfigurInfo from "./ConfigurInfo/ConfigurInfo";
 import SendToDataBase from "./SendToDataBase/SendToDataBase";
 import ConvertPDF from "./ConvertPDF/ConvertPDF";
-import { useSelector } from "react-redux";
 import formattingOrder from "../../utils/formattingOrder";
 import calculatingFinalPrice from "../../utils/calculatingFinalPrice";
 import calculatingTax from "../../utils/calculatingTax";
+import { useAppSelector } from "../../hooks/hooks";
+
+export type Purchase = {
+    id: string;
+    service_element: string;
+    quantity: string;
+    unit: string;
+    title: string;
+    discount: string;
+    price: string;
+    calculatedPrice: string;
+}
 
 export default function FormOrder() {
-    const { baseOption, options } = useSelector(store => store.selected)
+    const { baseOption, options } = useAppSelector(store => store.selected)
     const allOptions = [{ ...baseOption }, ...options]
-    const purchases = formattingOrder(allOptions)
-    const finalPrice = calculatingFinalPrice(purchases)
+    const purchases: Purchase[] = formattingOrder(allOptions)
+    const finalPrice: string = calculatingFinalPrice(purchases)
     const tax = calculatingTax(finalPrice)
 
     return (

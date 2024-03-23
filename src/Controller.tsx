@@ -1,12 +1,17 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { FC } from 'react';
+import { useEffect, useState } from 'react';
 import Calculator from './widgets/Calculator/Calculator';
 import FormOrder from './widgets/FormOrder/FormOrder';
-import { useDispatch, useSelector } from 'react-redux'
 import { productsList } from './redux/thunks/productsListThunk'
 import { Skeleton, Spin } from 'antd';
+import { useAppDispatch, useAppSelector } from './hooks/hooks';
+import { Request } from './redux/slices/selectedSlice';
 
+/**
+ * Компонет вывода прелоудера приложения
+ */
 
-const PreloaderApp = () => {
+const PreloaderApp: FC = () => {
     const [width, setWidth] = useState(window.innerWidth);
 
     function handleWindowSizeChange() {
@@ -79,7 +84,13 @@ const PreloaderApp = () => {
     )
 }
 
-const Redirect = ({ request }) => {
+/**
+ * Компонент вывода JSON (иммитация отправки JSON в БД)
+ * 
+ * @param request объект для сериализации в JSON и отправки в БД
+ */
+
+const Redirect: React.FC<{request: Request}> = ({request}) => {
     return (
         <p>
             {JSON.stringify(request)}
@@ -87,9 +98,13 @@ const Redirect = ({ request }) => {
     )
 }
 
-const App = () => {
-    const dispatch = useDispatch()
-    const { products, loading, error } = useSelector(store => store.products)
+/**
+ * Главный компонент приложения
+ */
+
+const App: FC = () => {
+    const dispatch = useAppDispatch()
+    const { products, loading, error } = useAppSelector(store => store.products)
 
     useEffect(() => {
         if (products.length === 0) {
@@ -126,8 +141,12 @@ const App = () => {
     )
 };
 
-const Controller = () => {
-    const { request } = useSelector(store => store.selected)
+/**
+ * Контрольный компонент
+ */
+
+const Controller: FC = () => {
+    const { request } = useAppSelector(store => store.selected)
     return (
         <>
             {

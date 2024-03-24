@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import products from '../../data/mockUpBackend.json'
 import { Option } from "../slices/selectedSlice";
 
-type Service = {
+export type TypeService = {
     serviceName: string;
     baseOptions?: Option[];
     options: Option[];
@@ -10,10 +10,8 @@ type Service = {
 
 export type Products = {
     product: string;
-    services: Service[];
+    services: TypeService[];
 }
-
-const services: Products[] = (products as Products[]); 
 
 export const productsList = createAsyncThunk<Products[], undefined, { rejectValue: string }>('products', async (_, { rejectWithValue }) => {
     // const response = await fetch(`url get request`);
@@ -25,7 +23,7 @@ export const productsList = createAsyncThunk<Products[], undefined, { rejectValu
     if (Math.random() > 0.8) {
         response = null;
     } else {
-        response = services;
+        response = products as Products[];
     }
 
     if (!response) {

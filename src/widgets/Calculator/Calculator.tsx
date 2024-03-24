@@ -1,8 +1,10 @@
 import Service from "./Service/Service"
 import { Empty } from 'antd'
 import { RightCircleFilled, LeftCircleFilled } from '@ant-design/icons'
+import React from "react"
+import { Products } from "../../redux/thunks/productsListThunk"
 
-export default function Calculator({ products, error }) {
+const Calculator: React.FC<{products: Products[], error: string}> = ({ products, error }) => {
 
     if (error) {
         return (
@@ -40,3 +42,5 @@ export default function Calculator({ products, error }) {
         </section>
     )
 }
+
+export default Calculator

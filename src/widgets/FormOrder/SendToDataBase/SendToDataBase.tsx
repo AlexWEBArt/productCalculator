@@ -1,19 +1,22 @@
 import { Button } from "antd"
-import { useDispatch } from "react-redux"
 import { sendRequst } from "../../../redux/slices/selectedSlice"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import formattingRequest from "../../../utils/formattingRequest"
+import { Purchase } from "../FormOrder"
+import { useAppDispatch } from "../../../hooks/hooks"
 
-export default function SendToDataBase({purchases}) {
-    const dispatch = useDispatch()
+const SendToDataBase: React.FC<{purchases: Purchase[]}> = ({purchases}) => {
+    const dispatch = useAppDispatch()
     const [disabled, setDisabled] = useState(true)
 
     useEffect(() => {
-        if (!purchases) {
+        if (purchases.length === 0) {
             return setDisabled(true)
         }
         setDisabled(false)
     }, [purchases])
+
+    if (!purchases) return null
 
     const handleOnClickConvert = () => {
         const request = formattingRequest(purchases)
@@ -26,3 +29,5 @@ export default function SendToDataBase({purchases}) {
         </div>
     )
 }
+
+export default SendToDataBase

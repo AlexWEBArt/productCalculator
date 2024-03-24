@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import Calculator from './widgets/Calculator/Calculator';
 import FormOrder from './widgets/FormOrder/FormOrder';
@@ -11,7 +11,7 @@ import { Request } from './redux/slices/selectedSlice';
  * Компонет вывода прелоудера приложения
  */
 
-const PreloaderApp: FC = () => {
+const PreloaderApp: React.FC = () => {
     const [width, setWidth] = useState(window.innerWidth);
 
     function handleWindowSizeChange() {
@@ -90,7 +90,7 @@ const PreloaderApp: FC = () => {
  * @param request объект для сериализации в JSON и отправки в БД
  */
 
-const Redirect: React.FC<{request: Request}> = ({request}) => {
+const Redirect: React.FC<{request: Request[]}> = ({request}) => {
     return (
         <p>
             {JSON.stringify(request)}
@@ -102,7 +102,7 @@ const Redirect: React.FC<{request: Request}> = ({request}) => {
  * Главный компонент приложения
  */
 
-const App: FC = () => {
+const App: React.FC = () => {
     const dispatch = useAppDispatch()
     const { products, loading, error } = useAppSelector(store => store.products)
 
@@ -145,7 +145,7 @@ const App: FC = () => {
  * Контрольный компонент
  */
 
-const Controller: FC = () => {
+const Controller: React.FC = () => {
     const { request } = useAppSelector(store => store.selected)
     return (
         <>

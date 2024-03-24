@@ -1,7 +1,10 @@
 import { Text, View } from '@react-pdf/renderer';
 import styles from '../Styles.js';
+import React from 'react';
+import { Purchase } from '../../../FormOrder.js';
+import { DataCO } from '../../../../../redux/slices/selectedSlice.js';
 
-export default function Cost({ finalPrice, tax, purchases, dataCO }) {
+const Cost: React.FC<{ finalPrice: number, tax: number, purchases: Purchase[], dataCO: DataCO }> = ({ finalPrice, tax, purchases, dataCO }) => {
     if (!finalPrice) return null
     return (
         <View style={styles.cost}>
@@ -114,7 +117,7 @@ export default function Cost({ finalPrice, tax, purchases, dataCO }) {
                     </View>
                 </View>
             </View>
-            <View style={styles.footer}>
+            <View>
                 <Text style={styles.footerText}>
                     Актуально на: {dataCO.DatePicker}
                 </Text>
@@ -125,3 +128,5 @@ export default function Cost({ finalPrice, tax, purchases, dataCO }) {
         </View>
     )
 }
+
+export default Cost

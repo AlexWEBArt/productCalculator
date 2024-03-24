@@ -1,12 +1,14 @@
 import React from 'react';
 import { PDFViewer, Page, View, Document } from '@react-pdf/renderer';
 import Intro from './DynamicComponent/Intro.jsx';
-import About from './StaticComponent/About';
-import Portfolio from './StaticComponent/Portfolio';
-import Cost from './DynamicComponent/Cost';
+import About from './StaticComponent/About.jsx';
+import Portfolio from './StaticComponent/Portfolio.jsx';
+import Cost from './DynamicComponent/Cost.tsx';
 import styles from './Styles.js';
+import { Purchase } from '../../FormOrder.js';
+import { DataCO } from '../../../../redux/slices/selectedSlice.js';
 
-export default function GeneratePDF({ finalPrice, tax, purchases, dataCO }) {
+const GeneratePDF: React.FC<{ finalPrice: number, tax: number, purchases: Purchase[], dataCO: DataCO }> = ({ finalPrice, tax, purchases, dataCO }) => {
     return (
         <PDFViewer width="800" height="600" >
             <Document style={styles.document}>
@@ -22,3 +24,5 @@ export default function GeneratePDF({ finalPrice, tax, purchases, dataCO }) {
         </PDFViewer >
     )
 }
+
+export default GeneratePDF

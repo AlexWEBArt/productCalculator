@@ -2,7 +2,9 @@ import React from "react";
 import InfoRow from "./InfoRow/InfoRow";
 import { Purchase } from "../FormOrder";
 
-const ConfigurInfo: React.FC<{ purchases: Purchase[] }> = ({ purchases }) => {
+const ConfigurInfo: React.FC<{ purchases: Purchase[] | undefined }> = ({ purchases }) => {
+    if (!purchases) return null
+
     const handleClickColapse = (e: React.MouseEvent<HTMLElement>) => {
         const closestWidget = (e.target as HTMLElement).closest('.widget__form-order');
         if (closestWidget) {

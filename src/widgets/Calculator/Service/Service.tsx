@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Divider } from 'antd';
 import BasicOption from '../BasicOption/BasicOption';
 import OptionsPckages from '../OptionsPckages/OptionsPckages';
+import { TypeService } from '../../../redux/thunks/productsListThunk';
 
-export default function Service({service}) {
+const Service: React.FC<{service: TypeService}> = ({service}) => {
     const { serviceName, baseOptions, options } = service
     const [hasBaseOption] = useState(baseOptions ? true : false) 
 
@@ -14,7 +15,7 @@ export default function Service({service}) {
                     <>
                         <h3 className='sub-title'>Базовый пакет</h3>
                         <h4 className='sub-title' style={{textAlign: 'center'}}>{serviceName}</h4>
-                        <BasicOption options={baseOptions}/>
+                        <BasicOption options={baseOptions || []}/>
                         <Divider/>
                     </>
                 )
@@ -29,3 +30,5 @@ export default function Service({service}) {
         </div>
     )
 }
+
+export default Service

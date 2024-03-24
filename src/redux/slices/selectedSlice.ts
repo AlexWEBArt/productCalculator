@@ -5,7 +5,7 @@ type DisabledOptionsID = {
     title?: string;
 }
 
-type Limits = {
+export type Limits = {
     max: string;
     min: string;
     step: string;
@@ -24,8 +24,8 @@ export type Option = {
 
     disabledForBaseLine?: DisabledOptionsID[];
     limits?: Limits;
-    discount?: string;
-    quantity?: string;
+    discount?: number;
+    quantity?: number;
 }
 
 export type Request = {
@@ -36,7 +36,7 @@ export type Request = {
     price: string;
 };
 
-type DataCO = {
+export type DataCO = {
     InputCompanyName: string;
     DatePicker: string;
     InputOperatorName: string;
@@ -45,7 +45,7 @@ type DataCO = {
 type OptionsState = {
     baseOption: Option | null,
     options: Option[],
-    request: Request | null,
+    request: Request[] | null,
     showModal: boolean,
     dataCO: DataCO | null,
 }
@@ -65,7 +65,7 @@ const selectedSlice = createSlice({
         selectBaseOption(state, action: PayloadAction<Option>) {
             state.baseOption = action.payload;
         },
-        addDiscountBaseOption(state, action: PayloadAction<string>) {
+        addDiscountBaseOption(state, action: PayloadAction<number>) {
             if (state.baseOption) {
                 state.baseOption = {
                     ...state.baseOption,
@@ -79,18 +79,20 @@ const selectedSlice = createSlice({
         unSelectOption(state, action: PayloadAction<Option>) {
             state.options = current(state).options.filter(option => option.id !== action.payload.id)
         },
-        addValue(state, action: PayloadAction<Option>) {
+        addDiscount(state, action: PayloadAction<{ id: string, discount: number }>) {
             state.options = current(state).options.map(option => {
-                if (!action.payload.discount) return option
-                if (option.id === action.payload.id && action.payload.discount >= '0') {
+                if (option.id === action.payload.id && action.payload.discount >= 0) {
                     return {
                         ...option,
                         discount: action.payload.discount,
                     }
                 }
-
-                if (!action.payload.quantity) return option
-                if (option.id === action.payload.id && action.payload.quantity) {
+                return option
+            })
+        },
+        addQuantity(state, action: PayloadAction<{ id: string, quantity: number }>) {
+            state.options = current(state).options.map(option => {
+                if (option.id === action.payload.id) {
                     return {
                         ...option,
                         quantity: action.payload.quantity
@@ -99,17 +101,17 @@ const selectedSlice = createSlice({
                 return option
             })
         },
-        sendRequst(state, action: PayloadAction<Request>) {
+        sendRequst(state, action: PayloadAction<Request[]>) {
             state.request = action.payload
         },
         showModal(state, action: PayloadAction<boolean>) {
             state.showModal = action.payload
         },
-        formForCO(state, action: PayloadAction<DataCO>) {
+        formForCO(state, action: PayloadAction<DataCO | null>) {
             state.dataCO = action.payload
         }
     }
 })
 
-export const { selectBaseOption, addDiscountBaseOption, selectOption, unSelectOption, addValue, sendRequst, showModal, formForCO } = selectedSlice.actions;
+export const { selectBaseOption, addDiscountBaseOption, selectOption, unSelectOption, addDiscount, addQuantity, sendRequst, showModal, formForCO } = selectedSlice.actions;
 export default selectedSlice.reducer;

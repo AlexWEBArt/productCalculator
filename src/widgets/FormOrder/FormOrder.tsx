@@ -1,38 +1,39 @@
 import FinalPrice from "./FinalPrice/FinalPrice";
 import ConfigurInfo from "./ConfigurInfo/ConfigurInfo";
-import SendToDataBase from "./SendToDataBase/SendToDataBase";
-import ConvertPDF from "./ConvertPDF/ConvertPDF";
+import SendToDataBase from "./SendToDataBase/SendToDataBase.tsx";
+import ConvertPDF from "./ConvertPDF/ConvertPDF.jsx";
 import formattingOrder from "../../utils/formattingOrder";
-import calculatingFinalPrice from "../../utils/calculatingFinalPrice";
-import calculatingTax from "../../utils/calculatingTax";
+import calculatingFinalPrice from "../../utils/calculatingFinalPrice.ts";
+import calculatingTax from "../../utils/calculatingTax.ts";
 import { useAppSelector } from "../../hooks/hooks";
+import { Option } from "../../redux/slices/selectedSlice.ts";
 
 export type Purchase = {
     id: string;
     service_element: string;
-    quantity: string;
+    quantity: number;
     unit: string;
     title: string;
-    discount: string;
-    price: string;
-    calculatedPrice: string;
+    discount: number;
+    price: number;
+    calculatedPrice: number;
 }
 
 export default function FormOrder() {
     const { baseOption, options } = useAppSelector(store => store.selected)
-    const allOptions = [{ ...baseOption }, ...options]
-    const purchases: Purchase[] = formattingOrder(allOptions)
-    const finalPrice: string = calculatingFinalPrice(purchases)
-    const tax = calculatingTax(finalPrice)
+    const allOptions: Option[] | null = baseOption ? [{ ...baseOption }, ...options] : null
+    const purchases: Purchase[] | null = formattingOrder(allOptions || null)
+    const finalPrice: number = calculatingFinalPrice(purchases || [])
+    const tax: number = calculatingTax(finalPrice)
 
     return (
         <section className="widget">
             <div className="widget__form-order">
-                {baseOption && <ConfigurInfo purchases={purchases} finalPrice={finalPrice}/>}
+                {baseOption && <ConfigurInfo purchases={purchases || []}/>}
                 <FinalPrice finalPrice={finalPrice} tax={tax}/>
                 <div className="button-container">
-                    <SendToDataBase purchases={purchases}/>
-                    <ConvertPDF finalPrice={finalPrice} tax={tax} purchases={purchases}/>
+                    <SendToDataBase purchases={purchases || []}/>
+                    <ConvertPDF finalPrice={finalPrice} tax={tax} purchases={purchases || []}/>
                 </div>
             </div>
         </section>

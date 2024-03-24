@@ -1,15 +1,16 @@
 import { Button, Modal } from "antd"
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import GeneratePDF from "./GeneratePDF/GeneratePDF";
 import FormToGenerate from "./FormToGenerate/FormToGenerate";
-import { useDispatch, useSelector } from "react-redux";
 import { formForCO } from "../../../redux/slices/selectedSlice";
+import { Purchase } from "../FormOrder";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 
-export default function ConvertPDF({ finalPrice, tax, purchases }) {
-  const { dataCO } = useSelector(store => store.selected)
+const ConvertPDF: React.FC<{ finalPrice: number, tax: number, purchases: Purchase[] }> = ({ finalPrice, tax, purchases }) => {
+  const { dataCO } = useAppSelector(store => store.selected)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [disabled, setDisabled] = useState(true)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -55,3 +56,5 @@ export default function ConvertPDF({ finalPrice, tax, purchases }) {
     </div>
   )
 }
+
+export default ConvertPDF

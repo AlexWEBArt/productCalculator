@@ -1,7 +1,7 @@
 import { Text, View } from '@react-pdf/renderer';
 import styles from '../Styles.js';
 
-export default function Intro({companyName}) {
+const Intro: React.FC<{companyName: string}> = ({companyName}) => {
     return (
         <View style={styles.intro}>
             <Text style={styles.h1}>Коммерческое предложение</Text>
@@ -10,3 +10,5 @@ export default function Intro({companyName}) {
         </View>
     )
 }
+
+export default Intro

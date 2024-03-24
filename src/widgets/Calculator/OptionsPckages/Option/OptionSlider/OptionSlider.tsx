@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { InputNumber, Row, Slider } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { addValue } from '../../../../../redux/slices/selectedSlice';
+import { Limits, Option, addQuantity } from '../../../../../redux/slices/selectedSlice';
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/hooks';
 
-export default function OptionSlider({ option, limits }) {
+const OptionSlider: React.FC<{ option: Option, limits: Limits}> = ({ option, limits }) => {
     const { max, min, step } = limits
-    const dispatch = useDispatch()
-    const { options } = useSelector(store => store.selected)
+    const dispatch = useAppDispatch()
+    const { options } = useAppSelector(store => store.selected)
     const [disabled, setDisabled] = useState(true)
     const [inputValue, setInputValue] = useState(Number(min));
 
@@ -21,13 +21,12 @@ export default function OptionSlider({ option, limits }) {
 
     useEffect(() => {
         if (!disabled) {
-            dispatch(addValue({ id: option.id, quantity: inputValue }))
+            dispatch(addQuantity({ id: option.id, quantity: inputValue }))
         }
     }, [inputValue, disabled])
 
-    const onChangeOptionValue = (newValue) => {
-
-        setInputValue(newValue);
+    const onChangeOptionValue = (newValue: number | null) => {
+        if(newValue) setInputValue(newValue);
     };
 
     return (
@@ -54,3 +53,5 @@ export default function OptionSlider({ option, limits }) {
         </Row>
     )
 }
+
+export default OptionSlider

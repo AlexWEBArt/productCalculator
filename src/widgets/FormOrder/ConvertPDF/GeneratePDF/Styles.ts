@@ -1,5 +1,7 @@
-import font from '../../../../assets/fonts/CraftworkGrotesk-Regular.ttf'
+import font from '../../../../assets/fonts/CraftworkGrotesk-Regular.ttf';
 import { StyleSheet, Font } from '@react-pdf/renderer';
+
+// const font: any = require('../../../../assets/fonts/CraftworkGrotesk-Regular.ttf');
 
 Font.register({
     family: "CraftworkGrotesk",

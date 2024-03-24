@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Tooltip, InputNumber, Divider } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { addValue, selectOption, unSelectOption } from '../../../../redux/slices/selectedSlice';
+import { Option, addDiscount, selectOption, unSelectOption } from '../../../../redux/slices/selectedSlice';
 import OptionSlider from './OptionSlider/OptionSlider';
 import { VerticalAlignTopOutlined } from '@ant-design/icons'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 
 
-export default function Option({ option }) {
-    const { baseOption } = useSelector(store => store.selected)
+const OptionFn: React.FC<{ option: Option }> = ({ option }) => {
+    const { baseOption } = useAppSelector(store => store.selected)
 
     const [disabled, setDisabled] = useState(false)
     const [switchOff, setSwitchOff] = useState(true)
     const [discountValue, setDiscountValue] = useState(0);
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (baseOption) {
+        if (baseOption && option.disabledForBaseLine) {
             const exception = option.disabledForBaseLine.find(exeption => exeption.id === baseOption.id)
             if (exception) {
                 dispatch(unSelectOption(option))
@@ -29,11 +29,11 @@ export default function Option({ option }) {
 
     useEffect(() => {
         if (discountValue >= 0) {
-            dispatch(addValue({ id: option.id, discount: discountValue }))
+            dispatch(addDiscount({ id: option.id, discount: discountValue }))
         }
     }, [discountValue])
 
-    const onChangeOptionSwitcher = (e) => {
+    const onChangeOptionSwitcher = (e: boolean) => {
         if (e) {
             setSwitchOff(false)
             dispatch(selectOption({ ...option, quantity: 1 }))
@@ -45,12 +45,15 @@ export default function Option({ option }) {
     };
 
     const handleOnClickMaxDiscount = () => {
-        if (switchOff) return
-        setDiscountValue(option.max_discount)
+        if (switchOff) return null
+
+        const maxDiscount = Number(option.max_discount)
+
+        setDiscountValue(maxDiscount)
     }
 
-    const onChangeOptionDiscount = (e) => {
-        setDiscountValue(e)
+    const onChangeOptionDiscount = (discount: number | null) => {
+        if (discount) setDiscountValue(discount)
     }
 
     return (
@@ -84,18 +87,24 @@ export default function Option({ option }) {
                         {
                             disabled || switchOff ?
                                 <Tooltip title={'Максимальная скидка ' + option.max_discount + '%. Нажмите, что бы применить.'}>
-                                    <span className='group-item__price__tooltip' style={{backgroundColor: 'rgba(0, 0, 0, 0.25)'}} onClick={handleOnClickMaxDiscount}><VerticalAlignTopOutlined /></span>
+                                    <span className='group-item__price__tooltip' style={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }} onClick={handleOnClickMaxDiscount}>
+                                        {/* @ts-ignore: Unreachable code error */}
+                                        <VerticalAlignTopOutlined />
+                                    </span>
                                 </Tooltip>
                                 :
                                 <Tooltip title={'Максимальная скидка ' + option.max_discount + '%. Нажмите, что бы применить.'}>
-                                    <span className='group-item__price__tooltip' onClick={handleOnClickMaxDiscount}><VerticalAlignTopOutlined /></span>
+                                    <span className='group-item__price__tooltip' onClick={handleOnClickMaxDiscount}>
+                                        {/* @ts-ignore: Unreachable code error */}
+                                        <VerticalAlignTopOutlined />
+                                    </span>
                                 </Tooltip>
                         }
 
                         <InputNumber
                             disabled={disabled || switchOff}
                             min={0}
-                            max={option.max_discount}
+                            max={Number(option.max_discount)}
                             defaultValue={0}
                             step={0.1}
                             value={discountValue}
@@ -107,3 +116,5 @@ export default function Option({ option }) {
         </div>
     )
 }
+
+export default OptionFn

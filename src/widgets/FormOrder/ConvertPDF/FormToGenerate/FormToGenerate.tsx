@@ -1,11 +1,17 @@
 import { useDispatch } from "react-redux";
-import { Button, ConfigProvider, DatePicker, Form, Input } from "antd"
+import { Button, ConfigProvider, DatePicker, Form, type FormProps, Input } from "antd"
 import { formForCO } from "../../../../redux/slices/selectedSlice";
-import formattingDate from "../../../../utils/formattingDate";
 import ru_RU from 'antd/locale/ru_RU'
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import 'dayjs/locale/ru'
+import React from "react";
+
+type FieldType = {
+    InputCompanyName: string;
+    DatePicker: string;
+    InputOperatorName: string;
+  };
 
 const dateFormat = 'YYYY-MM-DD';
 dayjs.extend(customParseFormat);
@@ -19,16 +25,18 @@ const formItemLayout = {
     },
 };
 
-export default function FormToGenerate() {
+const FormToGenerate: React.FC = () => {
     const dispatch = useDispatch()
 
-    const customFormat = (value) => `Актуально на: ${value.format(dateFormat)}`
+    const customFormat = (value: Dayjs) => `Актуально на: ${value.format(dateFormat)}`
 
-    const handleSubmitFormForCO = (e) => {
+    const handleSubmitFormForCO: FormProps<FieldType>["onFinish"] = (e) => {
+        const datePickerValue: Dayjs = dayjs(e.DatePicker);
+        const formattedDate: string = datePickerValue.format('YYYY-MM-DD');
         dispatch(formForCO({
             ...e,
-            DatePicker: formattingDate(e.DatePicker)
-        }))
+            DatePicker: formattedDate
+        }));
     }
 
     return (
@@ -94,3 +102,5 @@ export default function FormToGenerate() {
         </ConfigProvider>
     )
 }
+
+export default FormToGenerate

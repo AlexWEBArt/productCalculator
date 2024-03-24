@@ -1,6 +1,7 @@
+import React from "react";
 import CountUp from "react-countup";
 
-export default function FinalPrice({ finalPrice, tax }) {
+const FinalPrice: React.FC<{finalPrice: number, tax: number}> = ({ finalPrice, tax }) => {
     return (
         <>
             <div className="widget__form-order__final-price">
@@ -9,7 +10,7 @@ export default function FinalPrice({ finalPrice, tax }) {
                 </span>
                 <span>
                     {<CountUp duration={0.4} start={0} end={finalPrice || 0} suffix=" &#8381;" decimals={2}>
-                        {({ countUpRef, start }) => (
+                        {({ countUpRef }) => (
                             <div>
                                 <span ref={countUpRef} />
                             </div>
@@ -23,7 +24,7 @@ export default function FinalPrice({ finalPrice, tax }) {
                 </span>
                 <span>
                     {<CountUp duration={0.5} start={0} end={tax || 0} suffix=" &#8381;" decimals={2}>
-                        {({ countUpRef, start }) => (
+                        {({ countUpRef }) => (
                             <div>
                                 <span ref={countUpRef} />
                             </div>
@@ -38,7 +39,7 @@ export default function FinalPrice({ finalPrice, tax }) {
                 <span>
                     <b>
                         {<CountUp duration={0.3} start={0} end={(finalPrice + tax) || 0} suffix=" &#8381;" decimals={2}>
-                            {({ countUpRef, start }) => (
+                            {({ countUpRef }) => (
                                 <div>
                                     <span ref={countUpRef} />
                                 </div>
@@ -50,3 +51,5 @@ export default function FinalPrice({ finalPrice, tax }) {
         </>
     )
 }
+
+export default FinalPrice
